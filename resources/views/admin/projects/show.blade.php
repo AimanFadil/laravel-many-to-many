@@ -14,6 +14,16 @@
                         <p class="card-text">{{ $project->descrizione }}</p>
                         <p class="card-text text-success">{{ $project->type ? $project->type->nome : 'Senza Tipo' }}
                         </p>
+                        <p class="card-text text-danger">
+                            @forelse ($project->technologies as $technology)
+                                <p class="text-primary">{{ $technology->nome }}</p>
+                            @empty
+                                Senza Tecnologia
+                            @endforelse
+                            {{-- {{ $project->technologies == true ? 'vero' : 'Senza tecnologia' }} --}}
+                            {{-- {{ dd($project->technologies() as $technology) }} --}}
+
+                        </p>
                     </div>
                 </div>
             </div>

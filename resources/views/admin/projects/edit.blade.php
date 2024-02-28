@@ -43,6 +43,16 @@
                         @enderror
                     </div>
                     <div class="form-group py-2">
+                        <label class="control-label">Tecnologia:</label>
+                        @foreach ($technologies as $technology)
+                            <div class="form-check-inline">
+                                <input type="checkbox" name="technology[]" class="form-check-input"
+                                    value="{{ $technology->id }}">
+                                <label>{{ $technology->nome }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="form-group py-2">
                         <label for="type_id" class="control-label">Emulazione</label>
                         <select type="select" name="type_id" id="type_id" placeholder="tipo" class="form-select">
                             <option value="">Tipo</option>

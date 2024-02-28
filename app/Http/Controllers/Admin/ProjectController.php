@@ -79,9 +79,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Project $project, Technology $technology)
     {
-        return view('admin.projects.show', compact('project'));
+        return view('admin.projects.show', compact('project', 'technology'));
     }
 
     /**
@@ -122,8 +122,8 @@ class ProjectController extends Controller
         $form_data['slug'] = $slug;
         $project->update($form_data);
 
-        if ($request->has('technologies')) {
-            $project->technologies()->sync($form_data['technologies']);
+        if ($request->has('technology')) {
+            $project->technologies()->sync($form_data['technology']);
         } else {
             $project->technologies()->sync([]);
         }
