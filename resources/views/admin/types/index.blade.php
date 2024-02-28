@@ -5,7 +5,7 @@
         <div class="row">
             <div class="d-flex ">
                 <div class="col-11 ">
-                    <h1>Projects</h1>
+                    <h1>Types</h1>
                 </div>
                 <div class="col-3 ">
                     <a href="{{ route('admin.types.create') }}" class="btn btn-success">CREA TIPO</a>

@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
+use App\Models\Technology;
+
 
 
 
@@ -21,7 +23,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+
         $projects = Project::all();
+
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -33,8 +37,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
+
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -59,6 +65,10 @@ class ProjectController extends Controller
         $project->slug = $slug;
 
         $project->save();
+        /* dd($request->all()); */
+        if ($request->has('technology')) {
+            $project->technologies()->attach($form_data['technology']);;
+        }
 
         return redirect()->route('admin.projects.index');
     }
@@ -83,7 +93,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -110,6 +121,12 @@ class ProjectController extends Controller
         $slug = Str::slug($form_data['nome'], '-');
         $form_data['slug'] = $slug;
         $project->update($form_data);
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($form_data['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
 
         return redirect()->route('admin.projects.index');
     }

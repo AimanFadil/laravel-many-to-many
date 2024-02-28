@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Models\Project;
 
 class TechnologyController extends Controller
 {
